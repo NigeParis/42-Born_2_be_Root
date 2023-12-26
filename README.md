@@ -18,4 +18,6 @@ start
 install
 follow screenshots
 
+*************************************
 
+![Screenshot from 2023-12-26 09-03-25](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/44add0e7-954b-4cf8-881e-3eec17fe77da)
