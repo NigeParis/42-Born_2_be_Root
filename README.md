@@ -112,4 +112,135 @@ sudo apt-get install vim <br>
 
 ![Screenshot from 2023-12-26 09-35-38](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/552751fb-286c-483b-9dba-92608b5542f7)
 
+***** setup remote SSH ***** <br>
+sudo apt-get install openssh-server <br>
+sudo systemctl status ssh  <br>
+ip a (get ip adress) <br>
+add port 4242 <br>
+cd /etc/ssh <br>
+sudo vim sshd_config <br>
+edit #port 22 to port 4242 <br>
 
+***** install firewall UFW ***** <br>
+sudo apt-get install ufw <br>
+sudo ufw enable  <br>
+sudo ufw status <br>
+
+***** config Network Adapter 1 in VM ***** <br>
+Network -> Adapter 1 <br>
+Host Port 4241 Guest Port 4242 <br>
+sudo reboot <br>
+sudo ufw allow 4242/tcp <br>
+
+***** connection ssh ****** <br>
+connect user (nige) <br>
+open terminal (poste 42) <br>
+ssh -p 4241 nige@127.0.0.1 <br>
+enter password <br>
+
+***** Password setup ****** <br>
+sudo apt-get install libpam-pwquality <br>
+cd /etc/ <br>
+sudo vim login.defs <br>
+change : <br>
+	PASS_MAX_DAYS 30 <br>
+	pass_min_days 2 <br>
+	pass_warn_age 7 <br>
+cd /etc/pam.d <br>
+sudo vim common-password <br>
+add to line : password requisite pam_pwquality.so retry=3 <br>
+ 
+one uppercase                      : ucredit=-1 <br>
+one lowercase                      : lcredit=-1 <br>
+one digit                          : dcredit=-1 <br>
+min len                            : minlen=10 <br>
+max consec identical in pw         : maxrepeat=3 <br>
+check if pw contains username      : usercheck=0 <br>
+set mini nb chars diff from old pw : difok=7 <br>
+root pw comply to rules add        : enforce_for_root <br>
+
+sudo reboot <br>
+
+***** sudo setup ****** <br>
+cd /etc/sudoers.d <br>
+sudo visudo <br>
+
+Defaults	env_reset <br>
+Defaults	mail_badpass <br>
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin:/sbin:/bin" <br>
+Defaults	badpass_message="Password is wrong, please try again!" <br>
+Defaults	passwd_tries=3 <br>
+Defaults	logfile="/var/log/sudo/sudo.log" <br>
+Defaults	log_input, log_output <br>
+Defaults	requiretty <br>
+
+***** script monitoring.sh ***** <br>
+sudo vim /usr/local/bin/monitoring.sh <br>
+sudo apt-get install net-tools <br>
+************** monitoring.sh script ********* <br>
+
+#!/bin/bash <br>
+arc=$(uname -a) <br>
+pcpu=$(grep "physical id" /proc/cpuinfo | sort | uniq | wc -l)  <br>
+vcpu=$(grep "^processor" /proc/cpuinfo | wc -l) <br>
+fram=$(free -m | awk '$1 == "Mem:" {print $2}') <br>
+uram=$(free -m | awk '$1 == "Mem:" {print $3}') <br>
+pram=$(free | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}') <br>
+fdisk=$(df -BG | grep '^/dev/' | grep -v '/boot$' | awk '{ft += $2} END {print ft}') <br>
+udisk=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} END {print ut}') <br>
+pdisk=$(df -BM | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}') <br>
+cpul=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf("%.1f%%"), $1 + $3}') <br>
+lb=$(who -b | awk '$1 == "system" {print $3 " " $4}') <br>
+lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -eq 0 ]; then echo no; else echo yes; fi) <br>
+ctcp=$(ss -neopt state established | wc -l) <br>
+ulog=$(users | wc -w) <br>
+ip=$(hostname -I) <br>
+mac=$(ip link show | grep "ether" | awk '{print $2}') <br>
+cmds=$(journalctl _COMM=sudo | grep COMMAND | wc -l) <br>
+wall "	#Architecture: $arc <br>
+	#CPU physical: $pcpu <br>
+	#vCPU: $vcpu <br>
+	#Memory Usage: $uram/${fram}MB ($pram%) <br>
+	#Disk Usage: $udisk/${fdisk}Gb ($pdisk%) <br>
+	#CPU load: $cpul <br>
+	#Last boot: $lb <br>
+	#LVM use: $lvmu <br>
+	#Connections TCP: $ctcp ESTABLISHED <br>
+	#User log: $ulog <br>
+	#Network: IP $ip ($mac) <br>
+	#Sudo: $cmds cmd" <br>
+
+
+*********************************** <br>
+sudo reboot <br>
+bash /usr/local/bin/monitoring.sh -> to see results of script <br>
+
+next configure - 10 mins interval to run script <br>
+
+sudo crontab -u root -e  <- access script to lanch <br>
+add : */10 * * * * /usr/local/bin/monitoring.sh <br>
+
+note : order stars ***** minutes,  hours, day of the month, month, day of week <br>
+
+
+********************************************************** <br>
+
+Evaluation codes <br>
+
+sudo ufw status <br>
+sudo systemctl status ssh <br>
+getent group sudo <br>
+getent group user42 <br>
+sudo adduser new username <br>
+sudo groupadd groupname <br>
+sudo usermod -aG groupname username <br>
+sudo chage -l username - check password expire rules <br>
+hostnamectl <br>
+hostnamectl set-hostname new_hostname - to change the current hostname <br>
+Restart your Virtual Machine. <br>
+sudo nano /etc/hosts - change current hostname to new hostname <br>
+lsblk to display the partitions <br>
+dpkg -l | grep sudo – to show that sudo is installed <br>
+sudo ufw status numbered <br>
+sudo ufw allow port-id <br>
+sudo ufw delete rule number <br>
