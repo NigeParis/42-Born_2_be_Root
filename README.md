@@ -97,7 +97,7 @@ follow screenshots <br>
 **************** #Basic setup ********************** <br>
 de-crypt disk with passphrase. <br>
 login root <br>
-check disk -> lsblk (voir screenshot) <br>
+check disk -> lsblk (voir screenshot below) <br>
 apt-get update <br>
 apt-get upgrade <br>
 apt-get install sudo <br>
@@ -110,5 +110,6 @@ sudo groupadd user42 <br>
 sudo usermod -aG user42 nige <br>
 sudo apt-get install vim <br>
 
+![Screenshot from 2023-12-26 09-35-38](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/552751fb-286c-483b-9dba-92608b5542f7)
 
 
