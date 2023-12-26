@@ -95,7 +95,7 @@ follow screenshots <br>
 ![Screenshot from 2023-12-26 09-30-29](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/c49990da-fd6f-4dc3-bde0-878bf98a9253)
 
 **************** #Basic setup ********************** <br>
-de-cyrpt disk with passphrase. <br>
+de-crypt disk with passphrase. <br>
 login root <br>
 check disk -> lsblk (voir screenshot) <br>
 apt-get update <br>
