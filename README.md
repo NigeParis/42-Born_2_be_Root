@@ -176,7 +176,7 @@ Defaults	requiretty <br>
 
 ***** script monitoring.sh ***** <br>
 sudo vim /usr/local/bin/monitoring.sh <br>
-sudo apt-get install net-tools <br>
+sudo apt-get install net-tools <br> <br>
 ************** monitoring.sh script ********* <br>
 
 #!/bin/bash <br>
