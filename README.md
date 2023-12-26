@@ -94,7 +94,21 @@ follow screenshots
 
 ![Screenshot from 2023-12-26 09-30-29](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/c49990da-fd6f-4dc3-bde0-878bf98a9253)
 
+**************** #Basic setup **********************
 
+login root
+check disk -> lsblk (voir screenshot)
+apt-get update
+apt-get upgrade
+apt-get install sudo
+sudo usermod -aG sudo nige
+check sudo group -> getent group sudo
+reboot
+connect with user (my case nige)
+
+sudo groupadd user42
+sudo usermod -aG user42 nige
+sudo apt-get install vim
 
 
 
