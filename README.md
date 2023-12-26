@@ -1,24 +1,24 @@
 # 42-Born 2 be Root
 
-***** creation Virtual Machine *****<\br>
-download Debien from Debien.org
+***** creation Virtual Machine ***** <br>
+download Debien from Debien.org <br>
 
-Open VM
-bar de menu -> Machine -> New
-Name - nrobinso42
-choose folder sgoinfre
-choose linux
-choose Debien64 (downloaded to sgoinfre)
-memory 1024mb
-Create Virtual harddisk now
-choose VDI
-choose Dynamically allocated
-8 gb disksize
-start
-install
-follow screenshots
+Open VM <br>
+bar de menu -> Machine -> New <br>
+Name - nrobinso42 <br>
+choose folder sgoinfre <br>
+choose linux <br>
+choose Debien64 (downloaded to sgoinfre) <br>
+memory 1024mb <br>
+Create Virtual harddisk now <br>
+choose VDI <br>
+choose Dynamically allocated <br>
+8 gb disksize <br>
+start <br>
+install <br>
+follow screenshots <br>
 
-*************************************
+************************************* <br>
 
 ![Screenshot from 2023-12-26 09-03-25](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/44add0e7-954b-4cf8-881e-3eec17fe77da)
 
@@ -94,21 +94,21 @@ follow screenshots
 
 ![Screenshot from 2023-12-26 09-30-29](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/c49990da-fd6f-4dc3-bde0-878bf98a9253)
 
-**************** #Basic setup **********************
+**************** #Basic setup ********************** <br>
 
-login root
-check disk -> lsblk (voir screenshot)
-apt-get update
-apt-get upgrade
-apt-get install sudo
-sudo usermod -aG sudo nige
-check sudo group -> getent group sudo
-reboot
-connect with user (my case nige)
+login root <br>
+check disk -> lsblk (voir screenshot) <br>
+apt-get update <br>
+apt-get upgrade <br>
+apt-get install sudo <br>
+sudo usermod -aG sudo nige <br>
+check sudo group -> getent group sudo <br>
+reboot <br>
+connect with user (my case nige) <br>
 
-sudo groupadd user42
-sudo usermod -aG user42 nige
-sudo apt-get install vim
+sudo groupadd user42 <br>
+sudo usermod -aG user42 nige <br>
+sudo apt-get install vim <br>
 
 
 
