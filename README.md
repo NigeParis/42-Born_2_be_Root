@@ -1,6 +1,6 @@
 # 42-Born 2 be Root
 
-## ***** creation Virtual Machine ***** <br>
+## ** creation Virtual Machine ** <br>
 download Debien from Debien.org <br>
 
 Open VM <br>
@@ -94,7 +94,7 @@ follow screenshots <br>
 
 ![Screenshot from 2023-12-26 09-30-29](https://github.com/NigeParis/42-Born_2_be_Root/assets/128382762/c49990da-fd6f-4dc3-bde0-878bf98a9253)
 
-## **************** #Basic setup ********************** <br>
+## ** Basic setup ** <br>
 de-crypt disk with passphrase. <br>
 login root <br>
 check disk -> lsblk (voir screenshot below) <br>
@@ -121,24 +121,24 @@ cd /etc/ssh <br>
 sudo vim sshd_config <br>
 edit #port 22 to port 4242 <br>
 
-## ***** install firewall UFW ***** <br>
+## ** install firewall UFW ** <br>
 sudo apt-get install ufw <br>
 sudo ufw enable  <br>
 sudo ufw status <br>
 
-## ***** config Network Adapter 1 in VM ***** <br>
+## ** config Network Adapter 1 in VM ** <br>
 Network -> Adapter 1 <br>
 Host Port 4241 Guest Port 4242 <br>
 sudo reboot <br>
 sudo ufw allow 4242/tcp <br>
 
-## ***** connection ssh ****** <br>
+## ** connection ssh ** <br>
 connect user (nige) <br>
 open terminal (poste 42) <br>
 ssh -p 4241 nige@127.0.0.1 <br>
 enter password <br>
 
-## ***** Password setup ****** <br>
+## ** Password setup ** <br>
 sudo apt-get install libpam-pwquality <br>
 cd /etc/ <br>
 sudo vim login.defs <br>
@@ -161,7 +161,7 @@ root pw comply to rules add        : enforce_for_root <br>
 
 sudo reboot <br>
 
-## ***** sudo setup ****** <br>
+## ** sudo setup ** <br>
 cd /etc/sudoers.d <br>
 sudo visudo <br>
 
@@ -174,10 +174,10 @@ Defaults	logfile="/var/log/sudo/sudo.log" <br>
 Defaults	log_input, log_output <br>
 Defaults	requiretty <br>
 
-## ***** script monitoring.sh ***** <br>
+## ** script monitoring.sh ** <br>
 sudo vim /usr/local/bin/monitoring.sh <br>
 sudo apt-get install net-tools <br> <br>
-## ************** monitoring.sh script ********* <br>
+## ** monitoring.sh script ** <br>
 
 #!/bin/bash <br>
 arc=$(uname -a) <br>
@@ -211,7 +211,7 @@ wall "	#Architecture: $arc <br>
 	#Sudo: $cmds cmd" <br>
 
 
-*********************************** <br>
+****************************** <br>
 sudo reboot <br>
 bash /usr/local/bin/monitoring.sh -> to see results of script <br>
 
@@ -223,7 +223,7 @@ add : */10 * * * * /usr/local/bin/monitoring.sh <br>
 note : order stars ***** minutes,  hours, day of the month, month, day of week <br>
 
 
-********************************************************** <br>
+******************************* <br>
 
 ## Evaluation codes <br>
 
